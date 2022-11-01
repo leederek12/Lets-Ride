@@ -1,0 +1,35 @@
+def teambuilder(team, srs, pf, pa, dvoa, var):
+    return {'Team': team, 'Standard Relative Strength': srs, 'Points For': pf, 'Points Against': pa, 'DVOA': dvoa, 'Variance': var} 
+
+def extract(team):
+    return list(team.values())
+
+def win_probability(a, b):
+    if a > b:
+        a *= 100
+        print('Win Probability: ' + format(a,'.1f') + '%')
+    elif b > a:
+        b *= 100
+        print('Win Probability: ' + format(b, '.1f') + '%')
+    else:
+        print('Win Probability: 50%')
+
+def matchup(teama, teamb):
+    lista = extract(teama)
+    listb = extract(teamb)
+    totalstrength = int(lista[1]) + int(listb[1])
+    srsa = int(lista[1])/totalstrength
+    srsb = int(listb[1])/totalstrength
+    a = (float(lista[2]) + float(lista[3]) + float(listb[2]) + float(listb[3]))/2
+    x = srsa * a
+    y = srsb * a
+    x1 = (100 + float(lista[4]) + float(listb[5]) - float(lista[5]))/100
+    y1 = (100 + float(listb[4]) + float(lista[5]) - float(listb[5]))/100
+    score1 = x * x1
+    score2 = (y * y1) + 3
+    away = lista[0] + ': ' + str(round(score1))
+    home = listb[0] + ': ' + str(round(score2))
+    print(away)
+    print(home)
+    win_probability(srsa, srsb)
+    print()
