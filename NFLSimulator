@@ -28,15 +28,18 @@ def matchup(teama, teamb):
     lista = extract(teama)
     listb = extract(teamb) 
     totalstrength = int(lista[1]) + int(listb[1]) # Adding the total strength of both teams
-    srsa = int(lista[1])/totalstrength # Percent strength of team a based on Standard Relative Strength
-    srsb = int(listb[1])/totalstrength # Percent strength of team b based on Standard Relative Strength
+    srsa = int(lista[1])/totalstrength # Percent strength of team A based on Standard Relative Strength
+    srsb = int(listb[1])/totalstrength # Percent strength of team B based on Standard Relative Strength
     a = (float(lista[2]) + float(lista[3]) + float(listb[2]) + float(listb[3]))/2 # Adding the points for and points against for an O/U number
-    x = srsa * a
-    y = srsb * a
-    x1 = (100 + float(lista[4]) + float(listb[5]) - float(lista[5]))/100
-    y1 = (100 + float(listb[4]) + float(lista[5]) - float(listb[5]))/100
-    score1 = x * x1
-    score2 = (y * y1) + 3
+    x = srsa * a # Team A percent strength times O/U number
+    y = srsb * a # Team B percent strength times O/U number
+    x1 = (100 + float(lista[4]) + float(listb[5]) - float(lista[5]))/100 # Team A's DVOA plus Team B's performance variance minus Team A's performance variance
+    y1 = (100 + float(listb[4]) + float(lista[5]) - float(listb[5]))/100 # Team B's DVOA plus Team A's performance variance minus Team B's performance variance
+    score1 = x * x1 # Score prediction for team A based on the previous calculations
+    score2 = (y * y1) + 3 # Score prediction for team B based on the previous calculations plus 3 for home field advantage
+    
+    # Formatting the output and then printing
+    
     away = lista[0] + ': ' + str(round(score1))
     home = listb[0] + ': ' + str(round(score2))
     print(away)
