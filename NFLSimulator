@@ -26,14 +26,11 @@ def win_probability(a, b):
 
 def matchup(teama, teamb):
     lista = extract(teama)
-    listb = extract(teamb)
-    
-    # 
-    
-    totalstrength = int(lista[1]) + int(listb[1])
-    srsa = int(lista[1])/totalstrength
-    srsb = int(listb[1])/totalstrength
-    a = (float(lista[2]) + float(lista[3]) + float(listb[2]) + float(listb[3]))/2
+    listb = extract(teamb) 
+    totalstrength = int(lista[1]) + int(listb[1]) # Adding the total strength of both teams
+    srsa = int(lista[1])/totalstrength # Percent strength of team a based on Standard Relative Strength
+    srsb = int(listb[1])/totalstrength # Percent strength of team b based on Standard Relative Strength
+    a = (float(lista[2]) + float(lista[3]) + float(listb[2]) + float(listb[3]))/2 # Adding the points for and points against for an O/U number
     x = srsa * a
     y = srsb * a
     x1 = (100 + float(lista[4]) + float(listb[5]) - float(lista[5]))/100
