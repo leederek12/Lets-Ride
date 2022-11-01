@@ -1,8 +1,16 @@
+## Main arguments used for predicting scores are Standard Relative Strength, Points Per Game, Points Allowed Per Game, DVOA (From Football Outsiders), and Variance (From Football Outsiders)
+
+# Method below is for putting all the team information in a single dictionary
+
 def teambuilder(team, srs, pf, pa, dvoa, var):
     return {'Team': team, 'Standard Relative Strength': srs, 'Points For': pf, 'Points Against': pa, 'DVOA': dvoa, 'Variance': var} 
 
+# Extracts the values from the dictionary and turns it into a team based listed
+
 def extract(team):
     return list(team.values())
+
+# Takes in the standard relative strength of both teams and calculates who has a better chance of winning
 
 def win_probability(a, b):
     if a > b:
@@ -14,9 +22,14 @@ def win_probability(a, b):
     else:
         print('Win Probability: 50%')
 
+# Method that determines the scores based upon the teams playing
+
 def matchup(teama, teamb):
     lista = extract(teama)
     listb = extract(teamb)
+    
+    # 
+    
     totalstrength = int(lista[1]) + int(listb[1])
     srsa = int(lista[1])/totalstrength
     srsb = int(listb[1])/totalstrength
