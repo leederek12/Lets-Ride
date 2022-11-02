@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Teams {% endblock %}</h1>
+    {% for teams in teams %}
+        <div class='book'>
+            <h3>#{{ teams[0] }} - {{ teams[1] }} BY {{ teams[2] }}</h3>
+            <i><p>({{ teams[3] }} pages)</p></i>
+            <p class='record'>{{ teams[4] }}</p>
+            <i><p>Added {{ teams[5] }}</p></i>
+        </div>
+    {% endfor %}
+{% endblock %}
