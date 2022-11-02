@@ -99,7 +99,7 @@ function App() {
                 <p>Coach: {data[2]}</p>
                 <p>Record: {data[4]}</p>
                 <p>Stadium: {data[5]}</p>
-                <p>Previous Stadium: {data[5]}</p>
+                <p>Previous Stadium: {data[6]}</p>
                 <Divider></Divider>
               </div>
              )}): "There are no Projects!" }
@@ -127,6 +127,10 @@ function App() {
             <div>
                 <label>Stadium</label>
                 <input type="text" name="stadium" required />
+            </div>
+            <div>
+                <label>Previous Stadium</label>
+                <input type="text" name="prevName" required />
             </div>
             <div>
                 <button type="submit">Add Team</button>

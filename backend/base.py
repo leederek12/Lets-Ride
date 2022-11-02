@@ -33,8 +33,8 @@ def add_team():
         cur = conn.cursor()
         data = request.form.to_dict()
         print(data)
-        cur.execute("INSERT INTO teams (name, headcoach, city, record, stadium, prevName) VALUES (%s, %s, %s, %s, %s, %s))",
-                    (f"{data['name']}", f"{data['coach']}", f"{data['city']}", f"{data['record']}", f"{data['stadium']}", f"{data['prevName']}"))
+        cur.execute("INSERT INTO teams (name, headcoach, city, record, stadium, prevName) VALUES (%s, %s, %s, %s, %s, %s)",
+                    (f"{data['name']}", f"{data['city']}", f"{data['coach']}", f"{data['record']}", f"{data['stadium']}", f"{data['prevName']}"))
         conn.commit()
         return 'Form submitted'
     else:
