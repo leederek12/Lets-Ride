@@ -6,7 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm start` && `cd backend & flask run`
+
+This will set up the backend server(Flask) and also the React server.
+
+To set up the database in postgres, run python init_script.py.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
