@@ -1,3 +1,17 @@
+import './App.css';
+import Routing from "./routes/index";
+
+function App() {
+  return (
+      <div className="App">
+        <Routing />
+      </div>
+  );
+}
+
+export default App;
+
+/*
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from "axios";
@@ -90,7 +104,6 @@ function App() {
 
   return (
     <div className="App">
-        {/* new line start*/}
         {teamData && teamData.length != 0 ? teamData.map((data) => {
           return(
               <div>
@@ -141,3 +154,4 @@ function App() {
 }
 
 export default App;
+*/
