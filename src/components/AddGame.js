@@ -41,6 +41,10 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const [homePoints, setHomePoints] = React.useState();
+
+  const [awayPoints, setAwayPoints] = React.useState();
+
   const teams = [
     'Bears',
     'Bengals',
@@ -98,7 +102,6 @@ export default function FormDialog() {
           <FormControl sx={{ mt: 2, minWidth: 140 }}>
               <InputLabel>Chiefs</InputLabel>
               <Select
-                autoFocus
                 label="Home Team"
                 inputProps={{
                   name: 'home-team',
@@ -120,7 +123,6 @@ export default function FormDialog() {
           <FormControl sx={{ mt: 2, minWidth: 140 }}>
               <InputLabel>Broncos</InputLabel>
               <Select
-                autoFocus
                 label="Away Team"
                 inputProps={{
                   name: 'away-team',
@@ -139,10 +141,30 @@ export default function FormDialog() {
             </FormControl>
         </Grid>
         <Grid item xs={6}>
-            <TextField id="home-points" label="Home Team Points" variant="outlined" />
+            <TextField 
+                id="home-points" 
+                label="Home Team Points" 
+                variant="outlined" 
+                type="number"
+                InputProps={{
+                    inputProps: { min: 0 }
+                }}
+                onChange={(e) => setHomePoints(e.target.value)}
+                value={homePoints}
+            />
         </Grid>
         <Grid item xs={6}>
-            <TextField id="away-points" label="Away Team Points" variant="outlined" />
+            <TextField 
+                id="away-points" 
+                label="Away Team Points" 
+                variant="outlined"
+                type="number"
+                InputProps={{
+                    inputProps: { min: 0 }
+                }}
+                onChange={(e) => setAwayPoints(e.target.value)}
+                value={awayPoints}
+            />
         </Grid>
         <Grid item xs={12}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
