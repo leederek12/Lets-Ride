@@ -6,6 +6,7 @@ function Games() {
 
   return (
     <NavBar></NavBar>
+    
   );
 }
 
