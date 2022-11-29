@@ -100,7 +100,7 @@ export default function FormDialog() {
         <Grid container spacing={2}>
         <Grid item xs={6}>
           <FormControl sx={{ mt: 2, minWidth: 140 }}>
-              <InputLabel>Chiefs</InputLabel>
+              <InputLabel>Home Team</InputLabel>
               <Select
                 label="Home Team"
                 inputProps={{
@@ -121,7 +121,7 @@ export default function FormDialog() {
         </Grid>
         <Grid item xs={6}>
           <FormControl sx={{ mt: 2, minWidth: 140 }}>
-              <InputLabel>Broncos</InputLabel>
+              <InputLabel>Away Team</InputLabel>
               <Select
                 label="Away Team"
                 inputProps={{
