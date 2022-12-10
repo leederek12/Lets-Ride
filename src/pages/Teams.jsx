@@ -79,12 +79,13 @@ function Teams() {
       {teamData && teamData.length != 0 ? teamData.map((data) => {
         return (
           <div>
-            <p>Key: {data[0]}</p>
+            <p>Team ID: {data[0]}</p>
             <h2>{data[3]} {data[1]}</h2>
             <p>Coach: {data[2]}</p>
             <p>Record: {data[4]}</p>
             <p>Stadium: {data[5]}</p>
             <p>Previous Stadium: {data[6]}</p>
+            <p>Added Date: {data[7]}</p>
             <Divider></Divider>
           </div>
         );
@@ -117,6 +118,15 @@ function Teams() {
         <div>
           <label>Previous Stadium</label>
           <input type="text" name="prevName" required />
+        </div>
+
+        <div>
+          <label>Points Allowed Per Game</label>
+          <input type="integer" name="pointsAllowedPerGame" required />
+        </div>
+        <div>
+          <label>Points Scored Per Game</label>
+          <input type="integer" name="pointsPerGame" required />
         </div>
         <div>
           <button type="submit">Add Team</button>
