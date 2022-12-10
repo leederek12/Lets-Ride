@@ -93,8 +93,8 @@ function Scores() {
           <div>
             <p>Game ID: {data[0]}</p>
             <p>Date: {data[1]}</p>
-            <p>Team 1: {data[2]}</p>
-            <p>Team 2: {data[3]}</p>
+            <p>Team 1 ID: {data[2]}</p>
+            <p>Team 2 ID: {data[3]}</p>
             <p>Team 1 Score: {data[4]}</p>
             <p>Team 2 Score: {data[5]}</p>
             <p>Stadium: {data[6]}</p>
@@ -112,12 +112,12 @@ function Scores() {
           <input type="text" name="date" required />
         </div>
         <div>
-          <label>Team 1</label>
-          <input type="text" name="team1" required />
+          <label>Team 1 ID</label>
+          <input type="number" name="team1" required />
         </div>
         <div>
-          <label>Team 2</label>
-          <input type="text" name="team2" required />
+          <label>Team 2 ID</label>
+          <input type="number" name="team2" required />
         </div>
         <div>
           <label>Team 1 Score</label>
@@ -126,10 +126,6 @@ function Scores() {
         <div>
           <label>Team 2 Score</label>
           <input type="number" name="teamscore2" required />
-        </div>
-        <div>
-          <label>Stadium</label>
-          <input type="text" name="stadiumId" required />
         </div>
         <div>
           <button type="submit">Add Score</button>

@@ -118,8 +118,8 @@ def add_player():
         cur = conn.cursor()
         data = request.form.to_dict()
         print(data)
-        cur.execute("INSERT INTO players (name, birthday, age, height, weight, position, college) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                    (f"{data['name']}", f"{data['birthday']}", f"{data['age']}", f"{data['height']}", f"{data['weight']}", f"{data['position']}", f"{data['college']}"))
+        cur.execute("INSERT INTO players (name, teamId, birthday, age, height, weight, position, college) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                    (f"{data['name']}", f"{data['teamId']}", f"{data['birthday']}", f"{data['age']}", f"{data['height']}", f"{data['weight']}", f"{data['position']}", f"{data['college']}"))
         conn.commit()
         return 'Form submitted'
     else:
@@ -132,8 +132,8 @@ def add_game():
         cur = conn.cursor()
         data = request.form.to_dict()
         print(data)
-        cur.execute("INSERT INTO games (date, team1, team2, teamscore1, teamscore2, stadiumId) VALUES (%s, %s, %s, %s, %s, %s)",
-                    (f"{data['date']}", f"{data['team1']}", f"{data['team2']}", f"{data['teamscore1']}", f"{data['teamscore2']}", f"{data['stadiumId']}"))
+        cur.execute("INSERT INTO games (date, team1, team2, teamscore1, teamscore2) VALUES (%s, %s, %s, %s, %s)",
+                    (f"{data['date']}", f"{data['team1']}", f"{data['team2']}", f"{data['teamscore1']}", f"{data['teamscore2']}"))
         conn.commit()
         return 'Form submitted'
     else:

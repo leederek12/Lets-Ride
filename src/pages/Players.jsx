@@ -56,6 +56,7 @@ function Players() {
      const [name, setName] = useState('');
      const [birthday, setBirthday] = useState('');
      const [age, setAge] = useState('');
+     const [teamId, setTeam] = useState('');
      const [height, setHeight] = useState('');
      const [weight, setWeight] = useState('');
      const [position, setPosition] = useState('');
@@ -73,6 +74,10 @@ function Players() {
      const handleAge = (event) => {
        setAge(event.target.value);
      };
+
+     const handleTeam = (event) => {
+        setTeam(event.target.value);
+      };
    
      const handleHeight = (event) => {
        setHeight(event.target.value);
@@ -97,12 +102,13 @@ function Players() {
           <div>
             <p>Player ID: {data[0]}</p>
             <p>Name: {data[1]}</p>
-            <p>Birthday 1: {data[2]}</p>
-            <p>Age: {data[3]}</p>
-            <p>Height: {data[4]}</p>
-            <p>Weight: {data[5]}</p>
-            <p>Position: {data[6]}</p>
-            <p>College: {data[7]}</p>
+            <p>Team Id: {data[2]}</p>
+            <p>Birthday 1: {data[3]}</p>
+            <p>Age: {data[4]}</p>
+            <p>Height: {data[5]}</p>
+            <p>Weight: {data[6]}</p>
+            <p>Position: {data[7]}</p>
+            <p>College: {data[8]}</p>
             <Divider></Divider>
           </div>
         );
@@ -110,11 +116,15 @@ function Players() {
 
       <Divider></Divider>
 
-      <h3>Add Game</h3>
+      <h3>Add Player</h3>
       <form method="POST" action="http://127.0.0.1:5000/add-players">
         <div>
           <label>Name</label>
           <input type="text" name="name" required />
+        </div>
+        <div>
+          <label>Team Id</label>
+          <input type="id" name="teamId" required />
         </div>
         <div>
           <label>Birthday</label>

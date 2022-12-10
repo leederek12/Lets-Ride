@@ -35,6 +35,7 @@ cur.execute('CREATE TABLE coaches (id serial PRIMARY KEY,'
 cur.execute('DROP TABLE IF EXISTS players;')
 cur.execute('CREATE TABLE players (id serial PRIMARY KEY,'
                                  'name varchar (150) NOT NULL,'
+                                 'teamId int,'
                                  'birthday varchar (150) NOT NULL,'
                                  'age int,'
                                  'height int,'
