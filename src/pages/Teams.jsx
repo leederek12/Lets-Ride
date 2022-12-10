@@ -119,7 +119,7 @@ function Teams() {
             <p>Record: {data[4]}</p>
             <p>Stadium: {data[5]}</p>
             <p>Previous Stadium: {data[6]}</p>
-            <p>Added Date: {data[7]}</p>
+            <p>Last Modified Date: {data[7]}</p>
           <Divider></Divider>
           <form method="POST" action="http://127.0.0.1:5000/delete-team">
           <TextField maxWidth='0%' type="text" name="id" value={data[0]} required></TextField>

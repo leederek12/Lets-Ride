@@ -139,6 +139,34 @@ def add_player():
     else:
         return 'Form submission failed'  
 
+@app.route('/update-players', methods=['GET', 'POST'])
+def update_player():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("UPDATE players SET name=%s, teamId=%s WHERE id=%s",
+                    (f"{data['name']}", f"{data['teamId']}", f"{data['id']}"))
+        conn.commit()
+        return 'Player updated'
+    else:
+        return 'Player failed to update'  
+
+@app.route('/delete-player', methods=['GET', 'POST'])
+def delete_team():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("DELETE FROM players WHERE id=%s",
+                    (f"{data['id']}"))
+        conn.commit()
+        return 'Player Deleted'  
+    else:
+        return 'Player Deletion failed'  
+
 @app.route('/add-game', methods=['GET', 'POST'])
 def add_game():
     if request.method == 'POST':
@@ -153,6 +181,22 @@ def add_game():
     else:
         return 'Form submission failed' 
 
+
+@app.route('/delete-game', methods=['GET', 'POST'])
+def delete_team():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("DELETE FROM game WHERE id=%s",
+                    (f"{data['id']}"))
+        conn.commit()
+        return 'Game Deleted'  
+    else:
+        return 'Game Deletion failed'  
+
+
 @app.route('/add-stadium', methods=['GET', 'POST'])
 def add_stadium():
     if request.method == 'POST':
@@ -162,6 +206,20 @@ def add_stadium():
         print(data)
         cur.execute("INSERT INTO stadiums (name, city, owner) VALUES (%s, %s, %s)",
                     (f"{data['name']}", f"{data['city']}", f"{data['owner']}"))
+        conn.commit()
+        return 'Form submitted'
+    else:
+        return 'Form submission failed' 
+
+@app.route('/update-stadium', methods=['GET', 'POST'])
+def add_stadium():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("UPDATE stadiums SET name=%s, city=%s, owners=%s WHERE id=%s",
+                    (f"{data['name']}", f"{data['city']}", f"{data['owner']}", f"{data['id']}"))
         conn.commit()
         return 'Form submitted'
     else:
