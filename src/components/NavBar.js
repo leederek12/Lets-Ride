@@ -139,15 +139,6 @@ export default function NavBar() {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText primary="Add new game stats">
-              </ListItemText>
-            </ListItemButton>
-          </ListItem>
           <ListItem  onClick={() => handleButtonClick("/teams")} disablePadding>
             <ListItemButton>
               <ListItemIcon>
