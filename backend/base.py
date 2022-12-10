@@ -89,7 +89,7 @@ def add_team():
         data = request.form.to_dict()
         print(data)
         cur.execute("INSERT INTO teams (name, coachId, city, record, stadiumId, prevName) VALUES (%s, %s, %s, %s, %s, %s)",
-                    (f"{data['name']}", f"{data['city']}", f"{data['coach']}", f"{data['record']}", f"{data['stadium']}", f"{data['prevName']}"))
+                    (f"{data['name']}", f"{data['coach']}", f"{data['city']}", f"{data['record']}", f"{data['stadium']}", f"{data['prevName']}"))
         cur.execute("INSERT INTO stats (pointsAllowedPerGame, pointsPerGame) VALUES (%s, %s)",
                     (f"{data['pointsAllowedPerGame']}", f"{data['pointsPerGame']}"))
         conn.commit()
@@ -104,12 +104,26 @@ def update_team():
         cur = conn.cursor()
         data = request.form.to_dict()
         print(data)
-        cur.execute("UPDATE teams SET name=%s, headcoach=%s, city=%s, record=%s, stadium=%s, prevName=%s WHERE id=%s",
-                    (f"{data['name']}", f"{data['city']}", f"{data['coach']}", f"{data['record']}", f"{data['stadium']}", f"{data['prevName']}", f"{data['id']}"))
+        cur.execute("UPDATE teams SET name=%s, coachId=%s, city=%s, record=%s, stadiumId=%s, prevName=%s WHERE id=%s",
+                    (f"{data['name']}", f"{data['coach']}", f"{data['city']}", f"{data['record']}", f"{data['stadium']}", f"{data['prevName']}", f"{data['id']}"))
         conn.commit()
-        return 'Form submitted'
+        return 'Team Updated'
     else:
-        return 'Form submission failed'  
+        return 'Team Update failed'  
+
+@app.route('/delete-team', methods=['GET', 'POST'])
+def delete_team():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("DELETE FROM teams WHERE id=%s",
+                    (f"{data['id']}"))
+        conn.commit()
+        return 'Team Deleted'  
+    else:
+        return 'Team Deletion failed'  
 
 @app.route('/add-players', methods=['GET', 'POST'])
 def add_player():
