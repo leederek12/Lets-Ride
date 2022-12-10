@@ -119,6 +119,15 @@ function Teams() {
           <label>Previous Stadium</label>
           <input type="text" name="prevName" required />
         </div>
+
+        <div>
+          <label>Points Allowed Per Game</label>
+          <input type="integer" name="pointsAllowedPerGame" required />
+        </div>
+        <div>
+          <label>Points Scored Per Game</label>
+          <input type="integer" name="pointsPerGame" required />
+        </div>
         <div>
           <button type="submit">Add Team</button>
         </div>

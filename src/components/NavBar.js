@@ -155,12 +155,28 @@ export default function NavBar() {
               <ListItemText primary="Predictions" />
             </ListItemButton>
           </ListItem>
-          <ListItem onClick={() => handleButtonClick("/")} disablePadding>
+          <ListItem onClick={() => handleButtonClick("/games")} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <ListAltIcon />
               </ListItemIcon>
               <ListItemText primary="Games" />
+            </ListItemButton>
+          </ListItem>
+        <ListItem onClick={() => handleButtonClick("/players")} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <ListAltIcon />
+              </ListItemIcon>
+              <ListItemText primary="Players" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem onClick={() => handleButtonClick("/stadiums")} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <ListAltIcon />
+              </ListItemIcon>
+              <ListItemText primary="Stadiums" />
             </ListItemButton>
           </ListItem>
         </List>

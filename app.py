@@ -15,12 +15,22 @@ def get_db_connection():
     return conn
 
 
-@app.route('/teams')
-def index():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM teams;')
-    teams = cur.fetchall()
-    cur.close()
-    conn.close()
-    return render_template('index.html', teams=teams)
+# @app.route('/teams')
+# def teams():
+#     conn = get_db_connection()
+#     cur = conn.cursor()
+#     cur.execute('SELECT * FROM teams;')
+#     teams = cur.fetchall()
+#     cur.close()
+#     conn.close()
+#     return render_template('teams.html', teams=teams)
+
+# @app.route('/games')
+# def games():
+#     conn = get_db_connection()
+#     cur = conn.cursor()
+#     cur.execute('SELECT * FROM games;')
+#     teams = cur.fetchall()
+#     cur.close()
+#     conn.close()
+#     return render_template('games.html', teams=teams)
