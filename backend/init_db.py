@@ -93,8 +93,8 @@ cur.execute('CREATE TABLE stats (statsId serial PRIMARY KEY,'
 # Execute a command: this creates a new table
 cur.execute('DROP TABLE IF EXISTS predictions;')
 cur.execute('CREATE TABLE predictions (statsId serial PRIMARY KEY,'
-                                 'teamId1 int,'
-                                 'teamId2 int,'
+                                 'team1Id int,'
+                                 'team2Id int,'
                                  'teamScore1 int,'
                                  'teamScore2 int);'
                                  )
