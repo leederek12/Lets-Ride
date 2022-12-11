@@ -694,6 +694,78 @@ cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
              '264')
             )
 
+# ----------------------------------- Insert Predictions -----------------------------------
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('1',
+                '2',
+                '27',
+                '14'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('2',
+                '4',
+                '17',
+                '13'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('3',
+                '6',
+                '20',
+                '17'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('4',
+                '8',
+                '28',
+                '17'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('5',
+                '10',
+                '23',
+                '20'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('6',
+                '2',
+                '24',
+                '20'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('7',
+                '4',
+                '31',
+                '20'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('8',
+                '6',
+                '34',
+                '28'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('9',
+                '8',
+                '24',
+                '10'))
+
+cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+                'VALUES (%s, %s, %s, %s)',
+                ('10',
+                '7',
+                '28',
+                '24'))
+
 conn.commit()
 
 cur.close()
