@@ -37,7 +37,7 @@ function Players() {
    
        const handleSubmit = (event) => {
          var bodyFormData = new FormData();
-         bodyFormData.append(name, birthday, age, height, weight, position, college);
+         bodyFormData.append(name, team, pb, chmp, api1);
          console.log(bodyFormData)
    
          axios({
@@ -54,46 +54,10 @@ function Players() {
      }
    
      const [name, setName] = useState('');
-     const [birthday, setBirthday] = useState('');
-     const [age, setAge] = useState('');
-     const [teamId, setTeam] = useState('');
-     const [height, setHeight] = useState('');
-     const [weight, setWeight] = useState('');
-     const [position, setPosition] = useState('');
-     const [college, setCollege] = useState('');
-
-   
-     const handleName = (event) => {
-       setName(event.target.value);
-     };
-   
-     const handleBirthday = (event) => {
-       setBirthday(event.target.value);
-     };
-   
-     const handleAge = (event) => {
-       setAge(event.target.value);
-     };
-
-     const handleTeam = (event) => {
-        setTeam(event.target.value);
-      };
-   
-     const handleHeight = (event) => {
-       setHeight(event.target.value);
-     };
-
-     const handleWeight = (event) => {
-      setWeight(event.target.value);
-    };
-
-    const handlePosition = (event) => {
-      setPosition(event.target.value);
-    };
-
-    const handleCollege = (event) => {
-        setCollege(event.target.value);
-      };
+     const [team, setBirthday] = useState('');
+     const [pb, setpb] = useState('');
+     const [chmp, setWeight] = useState('');
+     const [api1, setPosition] = useState('');
 
   return (
     <><NavBar></NavBar><div className="App">
@@ -102,17 +66,17 @@ function Players() {
           <div>
             <p>Player ID: {data[0]}</p>
             <p>Name: {data[1]}</p>
-            <p>Team Id: {data[2]}</p>
-            <p>Birthday 1: {data[3]}</p>
-            <p>Age: {data[4]}</p>
-            <p>Height: {data[5]}</p>
-            <p>Weight: {data[6]}</p>
-            <p>Position: {data[7]}</p>
-            <p>College: {data[8]}</p>
+            <p>Team: {data[2]}</p>
+            <p>Pro Bowls 1: {data[3]}</p>
+            <p>Championships: {data[4]}</p>
+            <p>First All Pro: {data[5]}</p>
+            <p>First Year: {data[6]}</p>
+            <p>Last Year: {data[7]}</p>
+            <p>Games Played: {data[5]}</p>
             <Divider></Divider>
           </div>
         );
-      }) : "No games added"}
+      }) : "No players added"}
 
       <Divider></Divider>
 
@@ -123,35 +87,35 @@ function Players() {
           <input type="text" name="name" required />
         </div>
         <div>
-          <label>Team Id</label>
-          <input type="id" name="teamId" required />
+          <label>Team</label>
+          <input type="text" name="team" required />
         </div>
         <div>
-          <label>Birthday</label>
-          <input type="text" name="birthday" required />
+          <label>Championships</label>
+          <input type="text" name="chmp" required />
         </div>
         <div>
-          <label>Age</label>
-          <input type="text" name="age" required />
+          <label>All Pro Bowls</label>
+          <input type="text" name="ap1" required />
         </div>
         <div>
-          <label>Height</label>
-          <input type="text" name="height" required />
+          <label>Pro Bowls</label>
+          <input type="text" name="pb" required />
         </div>
         <div>
-          <label>Weight</label>
-          <input type="number" name="weight" required />
+          <label>From</label>
+          <input type="text" name="from" required />
         </div>
         <div>
-          <label>Position</label>
-          <input type="text" name="position" required />
+          <label>To</label>
+          <input type="text" name="to" required />
         </div>
         <div>
-          <label>College</label>
-          <input type="text" name="college" required />
+          <label>Games Played</label>
+          <input type="text" name="g" required />
         </div>
         <div>
-          <button type="submit">Add Score</button>
+          <button type="submit">Add Player</button>
         </div>
       </form>
     </div></>
