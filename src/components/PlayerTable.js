@@ -4,22 +4,47 @@ import axios from "axios";
 import { DataGrid } from '@mui/x-data-grid';
 
 export default function DataTable() {
+        const [playerData, setPlayerData] = useState(null)
+   
+        useEffect(() => {
+          console.log("reload")
+          getData()
+        }, []);
+      
+        function getData() {
+          axios({
+            method: "GET",
+            url:"http://127.0.0.1:5000/players",
+          })
+          .then((response) => {
+            console.log(response.data.length)
+            const results = response.data;
+            setPlayerData(results)
+          }).catch((error) => {
+            if (error.response) {
+              console.log(error.response)
+              console.log(error.response.status)
+              console.log(error.response.headers)
+              }
+          })}
+      
+          console.log("results: " + playerData)
      
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'player', headerName: 'Name', width: 200 },
+    { field: 'name', headerName: 'Name', width: 200 },
     { field: 'teamId', headerName: 'Team', width: 130 },
-    { field: 'chmp', headerName: 'Championships', width: 130 },
-    { field: 'AP1', headerName: '1st Team All-Pro', width: 150},
-    { field: 'PB', headerName: 'Pro Bowls', width: 100 },
-    { field: 'from', headerName: 'From', width: 100 },
-    { field: 'to', headerName: 'To', width: 100 },
-    { field: 'G', headerName: 'Games Played', width: 130 },
+    { field: 'birthday', headerName: 'Birthday', width: 130 },
+    { field: 'age', headerName: 'Age', width: 150},
+    { field: 'height', headerName: 'Height', width: 100 },
+    { field: 'weight', headerName: 'Weight', width: 100 },
+    { field: 'pos', headerName: 'Position', width: 100 },
+    { field: 'college', headerName: 'College', width: 130 }
   ];
 
 
 const rows = [
-    { id: 1, player: "Patrick Mahomes", teamId: "Chiefs", chmp: 1, AP1: 3, PB: 4, from: 2018, to: 2022, G: 77}
+    {id: playerData[0][0], name: "", teamId: "", birthday: "", age: "", height: "", weight: "", pos: "", college: ""}
 ];
 
   return (

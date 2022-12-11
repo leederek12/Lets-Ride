@@ -79,7 +79,6 @@ function Players() {
         );
       }) : "No players added"}
 
-      <PlayerTable></PlayerTable>
       <Divider></Divider>
 
       <h3>Add Player</h3>
