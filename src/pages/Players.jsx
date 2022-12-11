@@ -5,6 +5,7 @@ import '../App.css';
 import Divider from '@mui/material/Divider'; 
 import FormData from 'form-data';
 import NavBar from '../components/NavBar';
+import PlayerTable from '../components/PlayerTable';
 
 function Players() {
      // new line start
@@ -114,6 +115,7 @@ function Players() {
         );
       }) : "No games added"}
 
+      <PlayerTable></PlayerTable>
       <Divider></Divider>
 
       <h3>Add Player</h3>
