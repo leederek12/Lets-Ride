@@ -78,16 +78,150 @@ cur.execute('CREATE TABLE stats (statsId serial PRIMARY KEY,'
 
 
 
-# Insert data into the table
+
+
+
+
+
+# ----------------------------------- Insert Teams -----------------------------------
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Chiefs',
+             '1',
+             'Kansas City',
+             '17-21',
+             '1',
+             'Kansas City Municipal Stadium')
+            )
+
+
 cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
             'VALUES (%s, %s, %s, %s, %s, %s)',
             ('Saints',
-             '1',
+             '2',
              'New Orleans',
-             '3-5',
-             '1',
-             'Super Dome')
+             '10-13',
+             '2',
+             'Tiger Stadium')
             )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Packers',
+             '3',
+             'Green Bay',
+             '36-25',
+             '3',
+             'Milwaukee County Stadium')
+            )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Buccaneers',
+             '4',
+             'Tampa Bay',
+             '11-10',
+             '4',
+             'Houlihan\'s Stadium')
+            )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Steelers',
+             '5',
+             'Pittsburgh',
+             '36-27',
+             '5',
+             'Three Rivers Stadium')
+            )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Bears',
+             '6',
+             'Chicago',
+             '17-20',
+             '6',
+             'Memorial Stadium')
+            )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Seahawks',
+             '7',
+             'Seattle',
+             '10-13',
+             '7',
+             'Husky Stadium')
+            )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('49ers',
+             '8',
+             'San Francisco',
+             '35-23',
+             '8',
+             'Candlestick Park')
+            )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Broncos',
+             '9',
+             'Denver',
+             '23-19',
+             '9',
+             'Mile High Stadium')
+            )
+
+
+cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
+            'VALUES (%s, %s, %s, %s, %s, %s)',
+            ('Cardinals',
+             '10',
+             'Arizona',
+             '7-10',
+             '10',
+             'University of Phoenix',)
+            )    
+
+
+# ----------------------------------- Insert Players -----------------------------------
+
+cur.execute('INSERT INTO players (name, teamId, birthday, age, height, weight, position, college)'
+            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+            ('Trent McDuffie',
+             '1',
+             'September 13, 2000',
+             '22',
+             '5-11',
+             '195lb',
+             'DB',
+             'Washington',)
+            )    
+
+
+
+
+# ----------------------------------- Insert Coaches -----------------------------------
+
+
+
+
+
+
+
+
+
+
 
 # Insert data into the table
 cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
@@ -95,17 +229,6 @@ cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
             (21,
              12)
             )
-
-
-cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
-            'VALUES (%s, %s, %s, %s, %s, %s)',
-            ('Cardinals',
-             '1',
-             'Arizona',
-             '3-5',
-             '1',
-             'University of Phoenix',)
-            )    
 
 # Insert data into the table
 cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
