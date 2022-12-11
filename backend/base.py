@@ -143,7 +143,7 @@ def add_player():
         cur = conn.cursor()
         data = request.form.to_dict()
         print(data)
-        cur.execute("INSERT INTO players (name, team, chmp, ap1, pb, from, to, g) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+        cur.execute("INSERT INTO players (name, team, chmp, ap1, pb, fromDate, fromDate, g) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
                     (f"{data['name']}", f"{data['team']}", f"{data['chmp']}", f"{data['ap1']}", f"{data['pb']}", f"{data['from']}", f"{data['to']}", f"{data['g']}"))
         conn.commit()
         return 'Form submitted'
