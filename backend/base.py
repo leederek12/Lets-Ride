@@ -75,7 +75,7 @@ def coaches():
     if request.method == 'GET':
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('SELECT * FROM stats;')
+        cur.execute('SELECT * FROM coaches;')
         coaches = cur.fetchall()
         cur.close()
         conn.close()
