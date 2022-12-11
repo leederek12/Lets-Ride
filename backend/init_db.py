@@ -440,21 +440,6 @@ cur.execute('INSERT INTO players (name, teamId, birthday, age, height, weight, p
              'Marshall')
             )    
 
-cur.execute('INSERT INTO players (name, teamId, chmp, ap1, pb, from, to, g)'
-            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
-            ('Trent McDuffie',
-             '1',
-             'September 13, 2000',
-             '22',
-             '5-11',
-             '195lb',
-             'DB',
-             'Washington',)
-            )    
-
-
-
-
 # ----------------------------------- Insert Games -----------------------------------
 
 cur.execute('INSERT INTO games (date, team1, team2, teamscore1, teamscore2)'
