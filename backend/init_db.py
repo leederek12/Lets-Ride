@@ -76,15 +76,6 @@ cur.execute('CREATE TABLE stats (statsId serial PRIMARY KEY,'
                                  'date_added date DEFAULT CURRENT_TIMESTAMP);'
                                  )
 
-# stadium
-# Execute a command: this creates a new table
-cur.execute('DROP TABLE IF EXISTS stadiums;')
-cur.execute('CREATE TABLE stadiums (stadiumId serial PRIMARY KEY,'
-                                 'name varchar (150) NOT NULL,'
-                                 'city varchar (150) NOT NULL,'
-                                 'owner varchar (150) NOT NULL,'
-                                 'date_added date DEFAULT CURRENT_TIMESTAMP);'
-                                 )
 
 
 # Insert data into the table
