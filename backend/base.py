@@ -31,7 +31,7 @@ def get_teams():
     if request.method == 'GET':
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('SELECT name FROM teams;')
+        cur.execute('SELECT id, name FROM teams;')
         teams = cur.fetchall()
         cur.close()
         conn.close()
@@ -162,7 +162,22 @@ def update_player():
         conn.commit()
         return 'Player updated'
     else:
-        return 'Player failed to update'  
+        return 'Player failed to update' 
+
+@app.route('/run-predictions', methods=['GET', 'POST'])
+def run_predictions():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        conn.autocommit = True
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("CALL createProjection(%s, %s);",
+                    (f"{data['team1']}", f"{data['team2']}"))
+        conn.commit()
+        return 'Ran projection'
+    else:
+        return 'Failed to run projection.'   
 
 @app.route('/delete-player', methods=['GET', 'POST'])
 def delete_player():
