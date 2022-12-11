@@ -31,6 +31,7 @@ export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
     const [date, setDate] = React.useState(dayjs('2022-11-8T21:11:54'));
     const [games, setGames] = React.useState(0);
+    const [teamData, setTeamData] = useState([])
 
     const [homePoints, setHomePoints] = React.useState();
 
@@ -40,8 +41,25 @@ export default function FormDialog() {
         getData()
       }, []);
     
-      function getData() {
-        axios({
+      async function getData() {
+        await axios({
+            method: "GET",
+            url:"http://127.0.0.1:5000/teams",
+          })
+          .then((response) => {
+            console.log(response.data.length)
+            const results = response.data;
+            setTeamData(results)
+            console.log("teams: " + results)
+          }).catch((error) => {
+            if (error.response) {
+              console.log(error.response)
+              console.log(error.response.status)
+              console.log(error.response.headers)
+              }
+          })
+
+        await axios({
           method: "GET",
           url:"http://127.0.0.1:5000/games",
         })
@@ -106,7 +124,7 @@ export default function FormDialog() {
             <h2>Scores</h2>
             <Divider sx={{ mt: "20px" }}></Divider>
                 
-            {games !== undefined && games.length > 0 ? games.map((data) => (
+            {games != undefined && games.length > 0 ? games.map((data) => (
                         <Card
                         justifyContent="center"
                         fullWidth
@@ -124,9 +142,9 @@ export default function FormDialog() {
                                 container spacing={2}
                             >
                                 <Grid item xs={4}>
-                                <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+data[2].toLowerCase()+".png"} />
+                                <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+((teamData[parseInt(data[2])-1])[1]).toLowerCase()+".png"} />
                                     <Typography gutterBottom variant="h5" component="div">
-                                        {data[2]}
+                                        {((teamData[parseInt(data[2])-1])[1])}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={4}>
@@ -139,9 +157,9 @@ export default function FormDialog() {
         
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+data[3].toLowerCase()+".png"} />
+                                    <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+((teamData[parseInt(data[3])-1])[1]).toLowerCase()+".png"} />
                                     <Typography gutterBottom variant="h5" component="div">
-                                        {data[3]}
+                                        {((teamData[parseInt(data[3])-1])[1])}
                                     </Typography>
                                 </Grid>
                                 <br></br>
