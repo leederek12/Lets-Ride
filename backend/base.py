@@ -26,6 +26,17 @@ def teams():
         conn.close()
         return teams
 
+@app.route('/get-teams')
+def get_teams():
+    if request.method == 'GET':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('SELECT name FROM teams;')
+        teams = cur.fetchall()
+        cur.close()
+        conn.close()
+        return teams
+
 @app.route('/games')
 def games():
     if request.method == 'GET':
@@ -154,7 +165,7 @@ def update_player():
         return 'Player failed to update'  
 
 @app.route('/delete-player', methods=['GET', 'POST'])
-def delete_team():
+def delete_player():
     if request.method == 'POST':
         conn = get_db_connection()
         cur = conn.cursor()
@@ -183,7 +194,7 @@ def add_game():
 
 
 @app.route('/delete-game', methods=['GET', 'POST'])
-def delete_team():
+def delete_game():
     if request.method == 'POST':
         conn = get_db_connection()
         cur = conn.cursor()
@@ -212,7 +223,7 @@ def add_stadium():
         return 'Form submission failed' 
 
 @app.route('/update-stadium', methods=['GET', 'POST'])
-def add_stadium():
+def update_stadium():
     if request.method == 'POST':
         conn = get_db_connection()
         cur = conn.cursor()

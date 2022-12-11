@@ -8,7 +8,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import dayjs from 'dayjs';
 import Box from '@mui/material/Box';
+import { Divider, Container } from '@mui/material';
 import '../App.css';
+
+import axios from "axios";
+import { useState, useEffect } from 'react';
 
 const styles = theme => ({
     card: {
@@ -31,6 +35,30 @@ export default function FormDialog() {
     const [homePoints, setHomePoints] = React.useState();
 
     const [awayPoints, setAwayPoints] = React.useState();
+
+    useEffect(() => {
+        getData()
+      }, []);
+    
+      function getData() {
+        axios({
+          method: "GET",
+          url:"http://127.0.0.1:5000/games",
+        })
+        .then((response) => {
+          console.log(response.data.length)
+          var results = response.data;
+          console.log(results)
+          results.splice(0, 1);
+          setGames(results)
+        }).catch((error) => {
+          if (error.response) {
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+            }
+        })
+      }
 
     const teams = [
         'Bears',
@@ -68,47 +96,66 @@ export default function FormDialog() {
 
     return (
         <div>
-            <Card
-                justifyContent="center"
-                alignItems="center"
-                sx={{ maxWidth: 500 }}>
+            <Container 
+            fullWidth
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ maxWidth: 500, mt: "20px" }}>
 
-                <CardContent>
-                    <Typography gutterBottom variant="h4" component="div">
-                        Final Score
-                    </Typography>
-                    <Grid
+            <h2>Scores</h2>
+            <Divider sx={{ mt: "20px" }}></Divider>
+                
+            {games !== undefined && games.length > 0 ? games.map((data) => (
+                        <Card
                         justifyContent="center"
+                        fullWidth
+                        spacing={0}
                         alignItems="center"
-                        container spacing={2}
-                    >
-                        <Grid item xs={4}>
-                            <img width="112" height="75" src="process.env.PUBLIC_URL + ../../teamLogos/chiefs.png" />
-                            <Typography gutterBottom variant="h5" component="div">
-                                Chiefs
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
+                        sx={{ maxWidth: 500, ml:"28%", mt:"10px", mb: "10px" }}>
+        
+                        <CardContent>
                             <Typography gutterBottom variant="h4" component="div">
-                                0 - 72
+                                Final Score
                             </Typography>
-                            <Typography variant="h7" component="div">
-                                December 14th, 2022
-                            </Typography>
-
-                        </Grid>
-                        <Grid item xs={4}>
-                            <img width="112" height="75" src="process.env.PUBLIC_URL + ../../teamLogos/broncos.png" />
-                            <Typography gutterBottom variant="h5" component="div">
-                                Broncos
-                            </Typography>
-                        </Grid>
-                    </Grid>
-
-
-
-                </CardContent>
-            </Card>
+                            <Grid
+                                justifyContent="center"
+                                alignItems="center"
+                                container spacing={2}
+                            >
+                                <Grid item xs={4}>
+                                <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+data[2].toLowerCase()+".png"} />
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {data[2]}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Typography gutterBottom variant="h4" component="div">
+                                        {data[4]} - {data[5]}
+                                    </Typography>
+                                    <Typography variant="h7" component="div">
+                                        {data[1]}
+                                    </Typography>
+        
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+data[3].toLowerCase()+".png"} />
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {data[3]}
+                                    </Typography>
+                                </Grid>
+                                <br></br>
+                                <Divider></Divider>
+                                <br></br>
+                            </Grid>
+        
+        
+        
+                        </CardContent>
+                    </Card>
+                      )): ''}
+            </Container>
         </div>
     );
 }

@@ -19,14 +19,40 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
 import Stack from '@mui/material/Stack';
 import { render } from '@testing-library/react';
-import Game from './Game';
 
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 export default function FormDialog() {
 
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState(dayjs('2022-11-8T21:11:54'));
   const [games, setGames] = React.useState(0);
+  const [teamData, setTeamData] = useState(null)
+
+  useEffect(() => {
+    getData()
+  }, []);
+
+  function getData() {
+    axios({
+      method: "GET",
+      url:"http://127.0.0.1:5000/get-teams",
+    })
+    .then((response) => {
+      console.log(response.data.length)
+      var results = response.data;
+      console.log(results)
+      results.splice(0, 1);
+      setTeamData(results)
+    }).catch((error) => {
+      if (error.response) {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+        }
+    })
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -98,7 +124,7 @@ export default function FormDialog() {
         Add New Game Data
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add game</DialogTitle>
+        <DialogTitle sx={{ mt: 2 }}>Add game</DialogTitle>
         <DialogContent>
           <Box
             noValidate
@@ -111,117 +137,77 @@ export default function FormDialog() {
             }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <FormControl sx={{ mt: 2, minWidth: 140 }}>
-                  <InputLabel>Home Team</InputLabel>
-                  <Select
-                    label="Home Team"
-                    inputProps={{
-                      name: 'home-team',
-                      id: 'home-team',
-                    }}
-                  >
-                    {teams.map((name) => (
-                      <MenuItem
-                        key={name}
-                        value={name}
+            <form method="POST" action="http://127.0.0.1:5000/add-game">
+              <br></br>
+              <Grid item xs={12} sx={{ ml: 2 }}>
+                <div>
+                  <label>Date</label>
+                  <TextField fullWidth type="date" name="date" required />
+                </div>
+                <div>
+                  <InputLabel fullWidth>Home Team</InputLabel>
+                      <Select
+                        fullWidth
+                        label="Home Team"
+                        inputProps={{
+                          name: 'team1',
+                          id: 'home-team',
+                        }}
                       >
-                        {name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                        {teamData != undefined && teamData.length > 0 ? teamData.map((name, index) => (
+                          <MenuItem
+                            key={index}
+                            value={name}
+                          >
+                            {name}
+                          </MenuItem>
+                        )): ''}
+                      </Select>
+                </div>
+                <div>
+                  <InputLabel fullWidth>Away Team</InputLabel>
+                    <Select
+                      fullWidth
+                      label="Away Team"
+                      inputProps={{
+                        name: 'team2',
+                        id: 'away-team',
+                      }}
+                    >
+                      {teamData != undefined && teamData.length > 0 ? teamData.map((name, index) => (
+                        <MenuItem
+                          key={index}
+                          value={name}
+                        >
+                          {name}
+                        </MenuItem>
+                      )): ''}
+                    </Select>
+                </div>
+                {/* <div>
+                  <label>Team 2 ID</label>
+                  <TextField fullWidth type="number" name="team2" required />
+                </div> */}
+                <Grid item xs={12}>
+                  <label>Team 1 Score</label>
+                  <TextField fullWidth type="number" name="teamscore1" required />
+                </Grid>
+                <Grid item xs={12}>
+                    <label>Team 2 Score</label>
+                    <TextField fullWidth type="number" name="teamscore2" required />
+                </Grid>
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button type="submit">Submit</Button>
+                </DialogActions>
               </Grid>
-              <Grid item xs={6}>
-                <FormControl sx={{ mt: 2, minWidth: 140 }}>
-                  <InputLabel>Away Team</InputLabel>
-                  <Select
-                    label="Away Team"
-                    inputProps={{
-                      name: 'away-team',
-                      id: 'away-team',
-                    }}
-                  >
-                    {teams.map((name) => (
-                      <MenuItem
-                        key={name}
-                        value={name}
-                      >
-                        {name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  id="home-points"
-                  label="Home Team Points"
-                  variant="outlined"
-                  type="number"
-                  InputProps={{
-                    inputProps: { min: 0 }
-                  }}
-                  onChange={(e) => setHomePoints(e.target.value)}
-                  value={homePoints}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  id="away-points"
-                  label="Away Team Points"
-                  variant="outlined"
-                  type="number"
-                  InputProps={{
-                    inputProps: { min: 0 }
-                  }}
-                  onChange={(e) => setAwayPoints(e.target.value)}
-                  value={awayPoints}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DesktopDatePicker
-                    label="Game Date"
-                    inputFormat="MM/DD/YYYY"
-                    value={date}
-                    onChange={handleDateChange}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </Grid>
+              </form>
             </Grid>
-
-
           </Box>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Submit</Button>
-        </DialogActions>
+        
       </Dialog>
-      <Grid
-        justifyContent="center"
-        alignItems="center"
-        container spacing={2}
-      >
-        <Grid item xs={6}>
-          <Box
-            display="inline"
-            justifyContent="center"
-          >
-            <Game></Game>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box
-            display="inline"
-            justifyContent="center"
-          >
-            <Game></Game>
-          </Box>
-        </Grid>
-      </Grid>
+
     </div>
   );
 }

@@ -30,7 +30,8 @@ function Teams() {
            console.log(error.response.status)
            console.log(error.response.headers)
            }
-       })}
+       })
+      }
    
        //console.log("results: " + teamData)
        //end of new line 
