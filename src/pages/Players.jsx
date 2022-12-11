@@ -67,12 +67,12 @@ function Players() {
             <p>Player ID: {data[0]}</p>
             <p>Name: {data[1]}</p>
             <p>Team: {data[2]}</p>
-            <p>Pro Bowls 1: {data[3]}</p>
-            <p>Championships: {data[4]}</p>
-            <p>First All Pro: {data[5]}</p>
-            <p>First Year: {data[6]}</p>
-            <p>Last Year: {data[7]}</p>
-            <p>Games Played: {data[5]}</p>
+            <p>Birthday: {data[3]}</p>
+            <p>Age: {data[4]}</p>
+            <p>Height: {data[5]}</p>
+            <p>Weight: {data[6]}</p>
+            <p>Position: {data[7]}</p>
+            <p>College: {data[8]}</p>
             <Divider></Divider>
           </div>
         );
