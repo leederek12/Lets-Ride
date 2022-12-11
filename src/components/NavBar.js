@@ -18,6 +18,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import StadiumIcon from '@mui/icons-material/Stadium';
+import PersonIcon from '@mui/icons-material/Person';
+import GroupsIcon from '@mui/icons-material/Groups';
 import AddIcon from '@mui/icons-material/Add';
 import SportsFootballIcon from '@mui/icons-material/SportsFootball';
 import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
@@ -142,7 +145,7 @@ export default function NavBar() {
           <ListItem  onClick={() => handleButtonClick("/teams")} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <SportsFootballIcon />
+                <GroupsIcon />
               </ListItemIcon>
               <ListItemText primary="Teams" />
             </ListItemButton>
@@ -158,7 +161,7 @@ export default function NavBar() {
           <ListItem onClick={() => handleButtonClick("/games")} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <ListAltIcon />
+                <SportsFootballIcon />
               </ListItemIcon>
               <ListItemText primary="Games" />
             </ListItemButton>
@@ -166,7 +169,7 @@ export default function NavBar() {
         <ListItem onClick={() => handleButtonClick("/players")} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <ListAltIcon />
+                <PersonIcon />
               </ListItemIcon>
               <ListItemText primary="Players" />
             </ListItemButton>
@@ -174,7 +177,7 @@ export default function NavBar() {
           <ListItem onClick={() => handleButtonClick("/stadiums")} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <ListAltIcon />
+                <StadiumIcon />
               </ListItemIcon>
               <ListItemText primary="Stadiums" />
             </ListItemButton>
