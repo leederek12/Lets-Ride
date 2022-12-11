@@ -49,7 +49,6 @@ export default function FormDialog() {
           console.log(response.data.length)
           var results = response.data;
           console.log(results)
-          results.splice(0, 1);
           setGames(results)
         }).catch((error) => {
           if (error.response) {
