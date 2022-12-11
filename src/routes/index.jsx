@@ -15,7 +15,7 @@ const Routing = props => {
                 <Route exact path="/" element={<Games />} />
                 <Route exact path="/teams" element={<Teams />} />
                 <Route exact path="/predictions" element={<Predictions />} />                <Route exact path="/predictions" element={<Predictions />} />
-                <Route exact path="/games" element={<Scores />} />
+                <Route exact path="/games" element={<Games />} />
                 <Route exact path="/players" element={<Players />} />
                 <Route exact path="/stadiums" element={<Stadiums />} />
             </Routes>

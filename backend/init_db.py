@@ -51,9 +51,9 @@ cur.execute('CREATE TABLE players (id serial PRIMARY KEY,'
                                  'chmp int,'
                                  'ap1 int,'
                                  'pb int,'
-                                 'from int,'
-                                 'to varchar (150) NOT NULL,'
-                                 'g varchar (150) NOT NULL,'
+                                 'fromDate int,'
+                                 'toDate int,'
+                                 'g int,'
                                  'date_added date DEFAULT CURRENT_TIMESTAMP);'
                                  )
 """
@@ -89,7 +89,37 @@ cur.execute('CREATE TABLE stats (statsId serial PRIMARY KEY,'
                                  'date_added date DEFAULT CURRENT_TIMESTAMP);'
                                  )
 
+# predictions
+# Execute a command: this creates a new table
+cur.execute('DROP TABLE IF EXISTS predictions;')
+cur.execute('CREATE TABLE predictions (statsId serial PRIMARY KEY,'
+                                 'teamId1 int,'
+                                 'teamId2 int,'
+                                 'teamScore1 int,'
+                                 'teamScore2 int);'
+                                 )
 
+
+# ----------------------------------- Stored Procedure ------------------------------
+cur.execute('DROP PROCEDURE IF EXISTS createProjection;')
+cur.execute('create or replace procedure createProjection('
+                'team1 int,'
+                'team2 int)' 
+                'language plpgsql '    
+                'as $$ '
+                'begin '
+                'update predictions ' 
+                'set teamScore1 = (t2.pointsAllowedPerGame + t1.pointsPerGame)/2 ' 
+                'from stats t1, stats t2 '
+                'where predictions.teamId1 = team1 AND predictions.teamId2 = team2; '
+
+                'update predictions '
+                'set teamScore2 = (t1.pointsAllowedPerGame + t2.pointsPerGame)/2 ' 
+                'from stats t1, stats t2 '
+                'where predictions.teamId1 = team1 AND predictions.teamId2 = team2; '
+                'commit; '
+                'return; '
+                'end; $$')
 
 
 
@@ -280,6 +310,7 @@ cur.execute('INSERT INTO coaches (name, almaMater)'
 
 # ----------------------------------- Insert Players -----------------------------------
 
+
 cur.execute('INSERT INTO players (name, teamId, birthday, age, height, weight, position, college)'
             'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
             ('Trent McDuffie',
@@ -409,7 +440,6 @@ cur.execute('INSERT INTO players (name, teamId, birthday, age, height, weight, p
              'Marshall')
             )    
 
-"""
 cur.execute('INSERT INTO players (name, teamId, chmp, ap1, pb, from, to, g)'
             'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
             ('Trent McDuffie',
@@ -421,7 +451,8 @@ cur.execute('INSERT INTO players (name, teamId, chmp, ap1, pb, from, to, g)'
              'DB',
              'Washington',)
             )    
-"""
+
+
 
 
 # ----------------------------------- Insert Games -----------------------------------
