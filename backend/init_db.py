@@ -185,7 +185,7 @@ cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName
 
 cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
             'VALUES (%s, %s, %s, %s, %s, %s)',
-            ('Buccaneers',
+            ('Bucs',
              '4',
              'Tampa Bay',
              '11-10',
@@ -229,7 +229,7 @@ cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName
 
 cur.execute('INSERT INTO teams (name, coachId, city, record, stadiumId, prevName)'
             'VALUES (%s, %s, %s, %s, %s, %s)',
-            ('49ers',
+            ('Niners',
              '8',
              'San Francisco',
              '35-23',
