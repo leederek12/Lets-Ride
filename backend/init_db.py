@@ -675,7 +675,7 @@ cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
 
 cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
             'VALUES (%s, %s, %s)',
-            ('Buccaneers',
+            ('Bucs',
             '27',
              '21')
             )
@@ -707,7 +707,7 @@ cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
 
 cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
             'VALUES (%s, %s, %s)',
-            ('49ers',
+            ('Niners',
             '20',
              '16')
             )
@@ -738,7 +738,7 @@ cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
 cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
                 ('Saints',
-                'Buccaneers',
+                'Bucs',
                 '17',
                 '13'))
 
@@ -751,8 +751,8 @@ cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
 
 cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('Buccaneers',
-                '49ers',
+                ('Bucs',
+                'Niners',
                 '28',
                 '17'))
 
@@ -773,13 +773,13 @@ cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
 cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
                 ('Seahawks',
-                'Buccaneers',
+                'Bucs',
                 '31',
                 '20'))
 
 cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('49ers',
+                ('Niners',
                 'Bears',
                 '34',
                 '28'))
@@ -787,7 +787,7 @@ cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
 cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
                 ('Broncos',
-                '49ers',
+                'Niners',
                 '24',
                 '10'))
 
