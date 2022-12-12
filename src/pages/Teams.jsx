@@ -247,10 +247,6 @@ function Teams() {
                               {data[1]}
                           </Typography>
                           <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                              <Button sx={{ flexGrow: 1 }} variant="outlined" onClick={handleUpdateClickOpen}>
-                              Update Team
-                            </Button></Grid>
                             <Grid item xs={6}>
                             <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+data[1].toLowerCase()+".png"} />
                               
@@ -323,7 +319,8 @@ function Teams() {
             }}
           >
             <Grid container spacing={2}>
-            <form method="POST" action="http://127.0.0.1:5000/add-game">
+            <form method="POST" action="http://127.0.0.1:5000/add-team">
+            <TextField sx={{ width: "1px", height: "1px", "& fieldset": { border: 'none' } }} value={"Cowboys"} inputProps={{readOnly: true}} name="name"/>
               <br></br>
               <Grid item xs={12} sx={{ ml: 2 }}>
                 <div>
@@ -332,8 +329,8 @@ function Teams() {
                         fullWidth
                         label="Home Team"
                         inputProps={{
-                          name: 'team1',
-                          id: 'home-team',
+                          name: 'name',
+                          id: 'name',
                         }}
                       >
                         {teams != undefined && teams.length > 0 ? teams.map((name, index) => (
@@ -375,6 +372,7 @@ function Teams() {
                       <Select
                         fullWidth
                         label="Stadium"
+                        name="stadium"
                         inputProps={{
                           name: 'stadium',
                           id: 'stadium',
@@ -390,6 +388,7 @@ function Teams() {
                         )): ''}
                       </Select>
                 </Grid>
+                
                 <br></br>
                 <Divider>Team Statistics</Divider>
                 <br></br>

@@ -156,7 +156,7 @@ export default function FormDialog() {
   return (
     <div>
       <Button sx={{ flexGrow: 1 }} variant="outlined" onClick={handleClickOpen}>
-        Add New Game Data
+        Add New Team Data
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ mt: 2 }}>Add Team</DialogTitle>
@@ -172,7 +172,7 @@ export default function FormDialog() {
             }}
           >
             <Grid container spacing={2}>
-            <form method="POST" action="http://127.0.0.1:5000/add-game">
+            <form method="POST" action="http://127.0.0.1:5000/add-team">
               <br></br>
               <Grid item xs={12} sx={{ ml: 2 }}>
                 <div>
@@ -181,19 +181,21 @@ export default function FormDialog() {
                         fullWidth
                         label="Home Team"
                         inputProps={{
-                          name: 'team1',
+                          name: 'name',
                           id: 'home-team',
                         }}
                       >
                         {teams != undefined && teams.length > 0 ? teams.map((name, index) => (
                           <MenuItem
-                            key={index}
+                            key={name}
                             value={name}
                           >
                             {name}
                           </MenuItem>
                         )): ''}
                       </Select>
+                      <InputLabel fullWidth>City</InputLabel>
+                      <TextField fullWidth type="text" name="city" required/>
                 </div>
                 <Grid item xs={12}>
                 <InputLabel fullWidth>Coach</InputLabel>
@@ -208,7 +210,7 @@ export default function FormDialog() {
                         {coach != undefined && coach.length > 0 ? coach.map((name, index) => (
                           <MenuItem
                             key={index}
-                            value={name[1]}
+                            value={index}
                           >
                             {name[1]}
                           </MenuItem>
@@ -232,12 +234,14 @@ export default function FormDialog() {
                         {stadium != undefined && stadium.length > 0 ? stadium.map((name, index) => (
                           <MenuItem
                             key={index}
-                            value={name[1]}
+                            value={index}
                           >
                             {name[1]}
                           </MenuItem>
                         )): ''}
                       </Select>
+                      <InputLabel fullWidth>Previous Name</InputLabel>
+                      <TextField fullWidth type="text" name="prevName" required/>
                 </Grid>
                 <br></br>
                 <Divider>Team Statistics</Divider>
