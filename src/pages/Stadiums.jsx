@@ -168,7 +168,10 @@ function Stadiums() {
                         container spacing={2}
                     >
       {stadiumData && stadiumData.length != 0 ? stadiumData.map((data) => {
-        const imageURL = "process.env.PUBLIC_URL + ../../teamLogos/" + ((teamData[parseInt(data[0])-1])[1]).toLowerCase() + ".png";
+        var imageURL = "process.env.PUBLIC_URL + ../../teamLogos/" + data[3].toLowerCase() + ".png";
+        if ( teamData[parseInt(data[0])-1] !== undefined) {
+          imageURL = "process.env.PUBLIC_URL + ../../teamLogos/" + ((teamData[parseInt(data[0])-1])[1]).toLowerCase() + ".png";
+        }
         return (     
           <div>
             <Grid item xs={6}>
