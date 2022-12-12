@@ -58,17 +58,7 @@ export default function FormDialog() {
     setOpen(true);
   };
 
-  const handleDateChange = (newDate) => {
-    setDate(newDate);
-  };
-
   const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = () => {
-    //Logic to add game info to database
-    setGames(1);
     setOpen(false);
   };
 

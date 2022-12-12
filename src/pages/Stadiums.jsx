@@ -63,6 +63,7 @@ function Stadiums() {
      // new line start
 
      const [open, setOpen] = React.useState(false);
+     const [teamData, setTeamData] = useState([])
 
      const [stadiumData, setStadiumData] = useState(null)
 
@@ -72,21 +73,39 @@ function Stadiums() {
      }, []);
    
      function getData() {
+      axios({
+        method: "GET",
+        url:"http://127.0.0.1:5000/teams",
+      })
+      .then((response) => {
+        console.log(response.data.length)
+        const results = response.data;
+        setTeamData(results)
+        console.log("teams: " + results)
+      }).catch((error) => {
+        if (error.response) {
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+          }
+      })
+
        axios({
-         method: "GET",
-         url:"http://127.0.0.1:5000/stadiums",
-       })
-       .then((response) => {
-         console.log(response.data.length)
-         const results = response.data;
-         setStadiumData(results)
-       }).catch((error) => {
-         if (error.response) {
-           console.log(error.response)
-           console.log(error.response.status)
-           console.log(error.response.headers)
-           }
-       })}
+        method: "GET",
+        url:"http://127.0.0.1:5000/stadiums",
+      })
+      .then((response) => {
+        console.log(response.data.length)
+        const results = response.data;
+        setStadiumData(results)
+      }).catch((error) => {
+        if (error.response) {
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+          }
+      })
+      }
    
        console.log("results: " + stadiumData)
        //end of new line 
@@ -149,7 +168,7 @@ function Stadiums() {
                         container spacing={2}
                     >
       {stadiumData && stadiumData.length != 0 ? stadiumData.map((data) => {
-        const imageURL = "process.env.PUBLIC_URL + ../../teamLogos/" + data[3] + ".png";
+        const imageURL = "process.env.PUBLIC_URL + ../../teamLogos/" + ((teamData[parseInt(data[0])-1])[1]).toLowerCase() + ".png";
         return (     
           <div>
             <Grid item xs={6}>
