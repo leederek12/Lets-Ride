@@ -92,6 +92,17 @@ def players():
         conn.close()
         return players
 
+@app.route('/predictions')
+def predictions():
+    if request.method == 'GET':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM predictions;')
+        coaches = cur.fetchall()
+        cur.close()
+        conn.close()
+        return coaches
+
 @app.route('/add-team', methods=['GET', 'POST'])
 def add_team():
     if request.method == 'POST':
@@ -101,8 +112,8 @@ def add_team():
         print(data)
         cur.execute("INSERT INTO teams (name, coachId, city, record, stadiumId, prevName) VALUES (%s, %s, %s, %s, %s, %s)",
                     (f"{data['name']}", f"{data['coach']}", f"{data['city']}", f"{data['record']}", f"{data['stadium']}", f"{data['prevName']}"))
-        cur.execute("INSERT INTO stats (pointsAllowedPerGame, pointsPerGame) VALUES (%s, %s)",
-                    (f"{data['pointsAllowedPerGame']}", f"{data['pointsPerGame']}"))
+        cur.execute("INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame) VALUES (%s, %s)",
+                    (f"{data['name']}", f"{data['pointsAllowedPerGame']}", f"{data['pointsPerGame']}"))
         conn.commit()
         return 'Form submitted'
     else:
@@ -173,7 +184,22 @@ def run_predictions():
         data = request.form.to_dict()
         print(data)
         cur.execute("CALL createProjection(%s, %s);",
-                    (f"{data['team1']}", f"{data['team2']}"))
+                    (f"{data['teamName1']}", f"{data['teamName2']}"))
+        conn.commit()
+        return 'Ran projection'
+    else:
+        return 'Failed to run projection.'   
+
+@app.route('/run-predictions-with-injuries', methods=['GET', 'POST'])
+def run_predictions_with_injuries():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        conn.autocommit = True
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("CALL createProjectionInjuries(%s, %s, %s, %s);",
+                    (f"{data['teamName1']}", f"{data['teamName2']}", data['injuries1'], data['injuries2']))
         conn.commit()
         return 'Ran projection'
     else:
