@@ -6,6 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 export default function DataTable() {
     const [playerData, setPlayerData] = useState(null)
     const [rows, setRows] = useState(null)
+    const [teamData, setTeamData] = useState([])
 
      
     const columns = [
@@ -22,6 +23,24 @@ export default function DataTable() {
 
 
     useEffect(() => {
+
+      axios({
+        method: "GET",
+        url:"http://127.0.0.1:5000/teams",
+      })
+      .then((response) => {
+        console.log(response.data.length)
+        const results = response.data;
+        setTeamData(results)
+        console.log("teams: " + results)
+      }).catch((error) => {
+        if (error.response) {
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+          }
+      })
+    
     console.log("reload")
       axios({
         method: "GET",
@@ -43,7 +62,7 @@ export default function DataTable() {
           }]
         
         for (var i = 1; i < results.length; i++) {
-         values.push({id: results[i][0], name: results[i][1], teamId: 'Chiefs', 
+         values.push({id: results[i][0], name: results[i][1], teamId: (teamData[results[i][2]-1])[1], 
            birthday: results[i][3], age: results[i][4], height: results[i][5], 
          weight: results[i][6], pos: results[i][7], college: results[i][8]})
         }

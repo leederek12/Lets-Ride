@@ -116,32 +116,32 @@ function Players() {
           <input type="text" name="name" required />
         </div>
         <div>
-          <label>Team</label>
-          <input type="text" name="team" required />
+          <label>Team ID</label>
+          <input type="text" name="teamId" required />
         </div>
         <div>
-          <label>Championships</label>
-          <input type="text" name="chmp" required />
+          <label>Birthday</label>
+          <input type="text" name="birthday" required />
         </div>
         <div>
-          <label>All Pro Bowls</label>
-          <input type="text" name="ap1" required />
+          <label>Age</label>
+          <input type="text" name="age" required />
         </div>
         <div>
-          <label>Pro Bowls</label>
-          <input type="text" name="pb" required />
+          <label>Height</label>
+          <input type="text" name="height" required />
         </div>
         <div>
-          <label>From</label>
-          <input type="text" name="from" required />
+          <label>Weight</label>
+          <input type="text" name="weight" required />
         </div>
         <div>
-          <label>To</label>
-          <input type="text" name="to" required />
+          <label>Position</label>
+          <input type="text" name="position" required />
         </div>
         <div>
-          <label>Games Played</label>
-          <input type="text" name="g" required />
+          <label>College</label>
+          <input type="text" name="college" required />
         </div>
         <div>
           <button type="submit">Add Player</button>
