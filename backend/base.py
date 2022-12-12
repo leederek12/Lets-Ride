@@ -272,7 +272,7 @@ def delete_game():
         cur = conn.cursor()
         data = request.form.to_dict()
         print(data)
-        cur.execute("DELETE FROM game WHERE id=%s",
+        cur.execute("DELETE FROM games WHERE id=%s",
                     (f"{data['id']}"))
         conn.commit()
         return 'Game Deleted'  

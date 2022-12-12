@@ -6,6 +6,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField'; 
 import dayjs from 'dayjs';
 import Box from '@mui/material/Box';
 import { Divider, Container } from '@mui/material';
@@ -136,6 +137,10 @@ export default function FormDialog() {
                             <Typography gutterBottom variant="h4" component="div">
                                 Final Score
                             </Typography>
+                            <form method="POST" action="http://127.0.0.1:5000/delete-game">
+                                <TextField sx={{ width: "1px", height: "1px", "& fieldset": { border: 'none' } }} value={data[0]} inputProps={{readOnly: true}} name="id"/>
+                                <Button type="submit">Delete Game</Button>
+                            </form>
                             <Grid
                                 justifyContent="center"
                                 alignItems="center"
@@ -166,9 +171,6 @@ export default function FormDialog() {
                                 <Divider></Divider>
                                 <br></br>
                             </Grid>
-        
-        
-        
                         </CardContent>
                     </Card>
                       )): ''}
