@@ -247,10 +247,6 @@ function Teams() {
                               {data[1]}
                           </Typography>
                           <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                              <Button sx={{ flexGrow: 1 }} variant="outlined" onClick={handleUpdateClickOpen}>
-                              Update Team
-                            </Button></Grid>
                             <Grid item xs={6}>
                             <img width="112" height="112" src={"process.env.PUBLIC_URL + ../../teamLogos/"+data[1].toLowerCase()+".png"} />
                               

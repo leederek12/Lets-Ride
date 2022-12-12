@@ -43,7 +43,6 @@ export default function FormDialog() {
       console.log(response.data.length)
       var results = response.data;
       console.log(results)
-      results.splice(0, 1);
       setTeamData(results)
     }).catch((error) => {
       if (error.response) {
@@ -147,9 +146,9 @@ export default function FormDialog() {
                         {teamData != undefined && teamData.length > 0 ? teamData.map((name, index) => (
                           <MenuItem
                             key={index}
-                            value={name}
+                            value={name[0]}
                           >
-                            {name}
+                            {name[1]}
                           </MenuItem>
                         )): ''}
                       </Select>
@@ -167,9 +166,9 @@ export default function FormDialog() {
                       {teamData != undefined && teamData.length > 0 ? teamData.map((name, index) => (
                         <MenuItem
                           key={index}
-                          value={name}
+                          value={name[0]}
                         >
-                          {name}
+                          {name[1]}
                         </MenuItem>
                       )): ''}
                     </Select>
