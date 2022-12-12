@@ -247,7 +247,7 @@ function Stadiums() {
                 </div>
                 <div>
                 &nbsp;
-                <InputLabel id="Team">Age</InputLabel>
+                <InputLabel id="Team">Team</InputLabel>
                   <Select
                     sx={{ mt: 2, minWidth: 140 }}
                     labelId="Team"
