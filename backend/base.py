@@ -155,7 +155,7 @@ def add_player():
         data = request.form.to_dict()
         print(data)
         cur.execute("INSERT INTO players (name, teamId, birthday, age, height, weight, position, college) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-                    (f"{data['name']}", f"{data['teamId']}", f"{data['birthday']}", f"{data['age']}", f"{data['height']}", f"{data['eight']}", f"{data['position']}", f"{data['college']}"))
+                    (f"{data['name']}", f"{data['teamId']}", f"{data['birthday']}", f"{data['age']}", f"{data['height']}", f"{data['weight']}", f"{data['position']}", f"{data['college']}"))
         conn.commit()
         return 'Form submitted'
     else:
