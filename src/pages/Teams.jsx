@@ -319,7 +319,8 @@ function Teams() {
             }}
           >
             <Grid container spacing={2}>
-            <form method="POST" action="http://127.0.0.1:5000/add-game">
+            <form method="POST" action="http://127.0.0.1:5000/add-team">
+            <TextField sx={{ width: "1px", height: "1px", "& fieldset": { border: 'none' } }} value={"Cowboys"} inputProps={{readOnly: true}} name="name"/>
               <br></br>
               <Grid item xs={12} sx={{ ml: 2 }}>
                 <div>
@@ -328,8 +329,8 @@ function Teams() {
                         fullWidth
                         label="Home Team"
                         inputProps={{
-                          name: 'team1',
-                          id: 'home-team',
+                          name: 'name',
+                          id: 'name',
                         }}
                       >
                         {teams != undefined && teams.length > 0 ? teams.map((name, index) => (
@@ -371,6 +372,7 @@ function Teams() {
                       <Select
                         fullWidth
                         label="Stadium"
+                        name="stadium"
                         inputProps={{
                           name: 'stadium',
                           id: 'stadium',
@@ -386,6 +388,7 @@ function Teams() {
                         )): ''}
                       </Select>
                 </Grid>
+                
                 <br></br>
                 <Divider>Team Statistics</Divider>
                 <br></br>
