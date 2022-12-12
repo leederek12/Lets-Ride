@@ -147,6 +147,53 @@ cur.execute('create or replace procedure createProjectionInjuries('
                 'end; $$')
 
 
+# ----------------------------------- Stored Procedure ------------------------------
+cur.execute('DROP PROCEDURE IF EXISTS createProjectionSoS;')
+cur.execute('create or replace procedure createProjectionSoS('
+                'teamName1 varchar(150),'
+                'teamName2 varchar(150),' 
+                'sos1 varchar(150),'
+                'sos2 varchar(150))'
+                'language plpgsql '    
+                'as $$ '
+                'begin '
+                'update predictions ' 
+                'set teamScore1 = (t2.pointsAllowedPerGame + t1.pointsPerGame)/2 *(sos1:: DOUBLE PRECISION) ' 
+                'from stats t1, stats t2 '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
+
+                'update predictions '
+                'set teamScore2 = (t1.pointsAllowedPerGame + t2.pointsPerGame)/2 *(sos2:: DOUBLE PRECISION)' 
+                'from stats t1, stats t2 '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
+                'commit; '
+                'return; '
+                'end; $$')
+
+
+# ----------------------------------- Stored Procedure ------------------------------
+cur.execute('DROP PROCEDURE IF EXISTS createProjectionWinPercentage;')
+cur.execute('create or replace procedure createProjectionWinPercentage('
+                'teamName1 varchar(150),'
+                'teamName2 varchar(150),'
+                'wp varchar(150))'
+                'language plpgsql '    
+                'as $$ '
+                'begin '
+                'update predictions ' 
+                'set teamScore1 = (t2.pointsAllowedPerGame + t1.pointsPerGame)/2 *(((wp:: DOUBLE PRECISION)-0.5)*2+1) ' 
+                'from stats t1, stats t2 '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
+
+                'update predictions '
+                'set teamScore2 = (t1.pointsAllowedPerGame + t2.pointsPerGame)/2 ' 
+                'from stats t1, stats t2 '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
+                'commit; '
+                'return; '
+                'end; $$')
+
+
 
 
 # ----------------------------------- Insert Teams -----------------------------------
