@@ -205,6 +205,37 @@ def run_predictions_with_injuries():
     else:
         return 'Failed to run projection.'   
 
+# Probably wont work
+@app.route('/run-predictions-with-sos', methods=['GET', 'POST'])
+def run_predictions_with_sos():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        conn.autocommit = True
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("CALL createProjectionSoS(%s, %s, %s, %s);",
+                    (f"{data['teamName1']}", f"{data['teamName2']}", data['sos1'], data['sos2']))
+        conn.commit()
+        return 'Ran projection'
+    else:
+        return 'Failed to run projection.'  
+
+@app.route('/run-predictions-with-wp', methods=['GET', 'POST'])
+def run_predictions_with_wp():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        conn.autocommit = True
+        cur = conn.cursor()
+        data = request.form.to_dict()
+        print(data)
+        cur.execute("CALL createProjectionWinPercentage(%s, %s, %s);",
+                    (f"{data['teamName1']}", f"{data['teamName2']}", data['wp']))
+        conn.commit()
+        return 'Ran projection'
+    else:
+        return 'Failed to run projection.'  
+
 @app.route('/delete-player', methods=['GET', 'POST'])
 def delete_player():
     if request.method == 'POST':
