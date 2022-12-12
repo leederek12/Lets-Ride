@@ -29,18 +29,37 @@ function Predictions() {
   const [games, setGames] = React.useState(0);
   const [teamData, setData] = useState([])
   const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
 
 
   useEffect(() => {
     getData()
   }, []);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpen1 = () => {
+    setOpen1(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+
+  const handleClickOpen2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
+  };
+  
+  const handleClickOpen3 = () => {
+    setOpen3(true);
+  };
+
+  const handleClose3 = () => {
+    setOpen3(false);
   };
 
     async function getData() {
@@ -96,13 +115,14 @@ function Predictions() {
       })
     }
 
+
   return (
     <div>
       <NavBar/>
-      <Button sx={{ flexGrow: 1 }} variant="outlined" onClick={handleClickOpen}>
+      <Button sx={{ flexGrow: 1 }} variant="outlined" onClick={handleClickOpen1}>
         Create a Prediction With Injury Data
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open1} onClose={handleClose1}>
         <DialogTitle sx={{ mt: 2 }}>Create a Prediction With Injury Data</DialogTitle>
         <DialogContent>
           <Box
@@ -144,6 +164,103 @@ function Predictions() {
         </DialogContent>
         
       </Dialog>
+          
+      <br></br>
+
+
+      <Button sx={{ flexGrow: 1 }} variant="outlined" onClick={handleClickOpen2}>
+        Create a Prediction With Strength of Schedule
+      </Button>
+      <Dialog open={open2} onClose={handleClose2}>
+        <DialogTitle sx={{ mt: 2 }}>Create a Prediction With Strength of Schedule</DialogTitle>
+        <DialogContent>
+          <Box
+            noValidate
+            component="form"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              m: 'auto',
+              width: 'fit-content',
+            }}
+          >
+            <Grid container spacing={2}>
+            <form method="POST" action="http://127.0.0.1:5000/run-predictions-with-sos">
+              <br></br>
+              <Grid item xs={12} sx={{ ml: 2 }}>
+                <div>
+                      <h2>Update A Prediction</h2>
+                      <InputLabel fullWidth>Team 1</InputLabel>
+                      <TextField fullWidth type="text" name="teamName1" required></TextField>
+                </div>
+                <Grid item xs={12}>
+                <div>
+                <InputLabel fullWidth>Team 2</InputLabel>
+                <TextField fullWidth type="text" name="teamName2" required></TextField>
+
+                <InputLabel fullWidth>Strength of Schedule for Team 1</InputLabel>
+                <TextField fullWidth type="text" name="sos1" required></TextField>
+
+                <InputLabel fullWidth>Strength of Schedule for Team 2</InputLabel>
+                <TextField fullWidth type="text" name="sos2" required></TextField>
+
+                </div>
+                </Grid>
+                <Button type="submit">Submit</Button>
+              </Grid>
+              </form>
+            </Grid>
+          </Box>
+        </DialogContent>
+        
+      </Dialog>
+      
+      <br></br>
+
+      <Button sx={{ flexGrow: 1 }} variant="outlined" onClick={handleClickOpen3}>
+        Create a Prediction With Win Percentage
+      </Button>
+      <Dialog open={open3} onClose={handleClose3}>
+        <DialogTitle sx={{ mt: 2 }}>Create a Prediction With Win Percentage</DialogTitle>
+        <DialogContent>
+          <Box
+            noValidate
+            component="form"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              m: 'auto',
+              width: 'fit-content',
+            }}
+          >
+            <Grid container spacing={2}>
+            <form method="POST" action="http://127.0.0.1:5000/run-predictions-with-wp">
+              <br></br>
+              <Grid item xs={12} sx={{ ml: 2 }}>
+                <div>
+                      <h2>Update A Prediction</h2>
+                      <InputLabel fullWidth>Team 1</InputLabel>
+                      <TextField fullWidth type="text" name="teamName1" required></TextField>
+                </div>
+                <Grid item xs={12}>
+                <div>
+                <InputLabel fullWidth>Team 2</InputLabel>
+                <TextField fullWidth type="text" name="teamName2" required></TextField>
+
+                <InputLabel fullWidth>Win Percentage for Team 1</InputLabel>
+                <TextField fullWidth type="text" name="wp" required></TextField>
+
+                </div>
+                </Grid>
+                <Button type="submit">Submit</Button>
+              </Grid>
+              </form>
+            </Grid>
+          </Box>
+        </DialogContent>        
+      </Dialog>
+
+
       <form method="POST" action="http://127.0.0.1:5000/run-predictions">
               <br></br>
               <Grid item xs={12} sx={{ ml: 2 }}>
@@ -210,6 +327,9 @@ function Predictions() {
                         </CardContent>
                     </Card>
                       )): ''}
+
+
+    
     </div>
     
   );
