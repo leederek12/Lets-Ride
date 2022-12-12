@@ -7,7 +7,7 @@ export default function DataTable() {
     const [playerData, setPlayerData] = useState(null)
     const [rows, setRows] = useState(null)
     const [teamData, setTeamData] = useState([])
-
+    
      
     const columns = [
      { field: 'id', headerName: 'ID', width: 70 },
@@ -21,6 +21,19 @@ export default function DataTable() {
      { field: 'college', headerName: 'College', width: 130 }
    ];
 
+   const teams = [
+    "Chiefs",
+    "Saints",
+    "Packers",
+    "Bucs",
+    "Steelers",
+    "Bears",
+    "Seahwaks",
+    "Niners",
+    "Denver",
+    "Cardinals"
+   ]
+
 
     useEffect(() => {
 
@@ -31,7 +44,8 @@ export default function DataTable() {
       .then((response) => {
         console.log(response.data.length)
         const results = response.data;
-        setTeamData(results)
+        setTeamData(results);
+        console.log(results);
         console.log("teams: " + results)
       }).catch((error) => {
         if (error.response) {
@@ -62,7 +76,7 @@ export default function DataTable() {
           }]
         
         for (var i = 1; i < results.length; i++) {
-         values.push({id: results[i][0], name: results[i][1], teamId: (teamData[results[i][2]-1])[1], 
+         values.push({id: results[i][0], name: results[i][1], teamId: teams[results[i][2] - 1], 
            birthday: results[i][3], age: results[i][4], height: results[i][5], 
          weight: results[i][6], pos: results[i][7], college: results[i][8]})
         }
