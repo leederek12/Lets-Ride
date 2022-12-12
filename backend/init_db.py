@@ -84,6 +84,7 @@ cur.execute('CREATE TABLE stadiums (stadiumId serial PRIMARY KEY,'
 # Execute a command: this creates a new table
 cur.execute('DROP TABLE IF EXISTS stats;')
 cur.execute('CREATE TABLE stats (statsId serial PRIMARY KEY,'
+                                'teamName varchar (150) NOT NULL,'
                                  'pointsAllowedPerGame int,'
                                  'pointsPerGame int,'
                                  'date_added date DEFAULT CURRENT_TIMESTAMP);'
@@ -93,8 +94,8 @@ cur.execute('CREATE TABLE stats (statsId serial PRIMARY KEY,'
 # Execute a command: this creates a new table
 cur.execute('DROP TABLE IF EXISTS predictions;')
 cur.execute('CREATE TABLE predictions (statsId serial PRIMARY KEY,'
-                                 'teamId1 int,'
-                                 'teamId2 int,'
+                                 'team1 varchar (150) NOT NULL,'
+                                 'team2 varchar (150) NOT NULL,'
                                  'teamScore1 int,'
                                  'teamScore2 int);'
                                  )
@@ -103,24 +104,47 @@ cur.execute('CREATE TABLE predictions (statsId serial PRIMARY KEY,'
 # ----------------------------------- Stored Procedure ------------------------------
 cur.execute('DROP PROCEDURE IF EXISTS createProjection;')
 cur.execute('create or replace procedure createProjection('
-                'team1 int,'
-                'team2 int)' 
+                'teamName1 varchar(150),'
+                'teamName2 varchar(150))' 
                 'language plpgsql '    
                 'as $$ '
                 'begin '
                 'update predictions ' 
                 'set teamScore1 = (t2.pointsAllowedPerGame + t1.pointsPerGame)/2 ' 
                 'from stats t1, stats t2 '
-                'where predictions.teamId1 = team1 AND predictions.teamId2 = team2; '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
 
                 'update predictions '
                 'set teamScore2 = (t1.pointsAllowedPerGame + t2.pointsPerGame)/2 ' 
                 'from stats t1, stats t2 '
-                'where predictions.teamId1 = team1 AND predictions.teamId2 = team2; '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
                 'commit; '
                 'return; '
                 'end; $$')
 
+
+# ----------------------------------- Stored Procedure ------------------------------
+cur.execute('DROP PROCEDURE IF EXISTS createProjectionInjuries;')
+cur.execute('create or replace procedure createProjectionInjuries('
+                'teamName1 varchar(150),'
+                'teamName2 varchar(150),'
+                'injuries1 varchar(150),'
+                'injuries2 varchar(150))' 
+                'language plpgsql '    
+                'as $$ '
+                'begin '
+                'update predictions ' 
+                'set teamScore1 = (t2.pointsAllowedPerGame + t1.pointsPerGame)/2 *(1-(injuries1:: DOUBLE PRECISION)) ' 
+                'from stats t1, stats t2 '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
+
+                'update predictions '
+                'set teamScore2 = (t1.pointsAllowedPerGame + t2.pointsPerGame)/2 *(1-(injuries2:: DOUBLE PRECISION))' 
+                'from stats t1, stats t2 '
+                'where t1.teamName = teamName1 AND t2.teamName = teamName2 AND predictions.team1 = teamName1 AND predictions.team2 = teamName2; '
+                'commit; '
+                'return; '
+                'end; $$')
 
 
 
@@ -625,144 +649,152 @@ cur.execute('INSERT INTO stadiums (name, city, owner)'
 
 # ----------------------------------- Insert Stats -----------------------------------
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('270',
-             '350')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Chiefs', 
+            '27',
+             '35')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('297',
-             '265')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Saints',
+            '29',
+             '26')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('302',
-             '263')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Packers',
+            '30',
+             '26')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('219',
-             '217')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Buccaneers',
+            '27',
+             '21')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('277',
-             '213')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Steelers',
+            '33',
+             '27')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('333',
-             '270')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Bears',
+            '30',
+             '31')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('304',
-             '318')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Seahawks',
+            '19',
+             '28')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('190',
-             '282')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('49ers',
+            '20',
+             '16')
             )
 
 
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('204',
-             '166')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Broncos',
+            '32',
+             '26')
             )
 
-
-cur.execute('INSERT INTO stats (pointsAllowedPerGame, pointsPerGame)'
-            'VALUES (%s, %s)',
-            ('321',
-             '264')
+cur.execute('INSERT INTO stats (teamName, pointsAllowedPerGame, pointsPerGame)'
+            'VALUES (%s, %s, %s)',
+            ('Cardinals', '21',
+             '21')
             )
 
 # ----------------------------------- Insert Predictions -----------------------------------
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('1',
-                '2',
+                ('Chiefs',
+                'Saints',
                 '27',
                 '14'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('2',
-                '4',
+                ('Saints',
+                'Buccaneers',
                 '17',
                 '13'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('3',
-                '6',
+                ('Packers',
+                'Bears',
                 '20',
                 '17'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('4',
-                '8',
+                ('Buccaneers',
+                '49ers',
                 '28',
                 '17'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('5',
-                '10',
+                ('Steelers',
+                'Cardinals',
                 '23',
                 '20'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('6',
-                '2',
+                ('Bears',
+                'Saints',
                 '24',
                 '20'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('7',
-                '4',
+                ('Seahawks',
+                'Buccaneers',
                 '31',
                 '20'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('8',
-                '6',
+                ('49ers',
+                'Bears',
                 '34',
                 '28'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('9',
-                '8',
+                ('Broncos',
+                '49ers',
                 '24',
                 '10'))
 
-cur.execute('INSERT INTO predictions (team1id, team2id, teamscore1, teamscore2)'
+cur.execute('INSERT INTO predictions (team1, team2, teamscore1, teamscore2)'
                 'VALUES (%s, %s, %s, %s)',
-                ('10',
-                '7',
+                ('Cardinals',
+                'Seahawks',
                 '28',
                 '24'))
 
