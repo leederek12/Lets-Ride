@@ -9,6 +9,7 @@ import NavBar from '../components/NavBar';
 function Players() {
      // new line start
      const [playerData, setPlayerData] = useState(null)
+     const [teamData, setTeamData] = useState([])
 
      useEffect(() => {
        console.log("reload")
@@ -30,7 +31,27 @@ function Players() {
            console.log(error.response.status)
            console.log(error.response.headers)
            }
-       })}
+       })
+
+
+      axios({
+        method: "GET",
+        url:"http://127.0.0.1:5000/teams",
+      })
+      .then((response) => {
+        console.log(response.data.length)
+        const results = response.data;
+        setTeamData(results)
+        console.log("teams: " + results)
+      }).catch((error) => {
+        if (error.response) {
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+          }
+      })
+      
+      }
    
        console.log("results: " + playerData)
        //end of new line 
@@ -66,7 +87,7 @@ function Players() {
           <div>
             <p>Player ID: {data[0]}</p>
             <p>Name: {data[1]}</p>
-            <p>Team: {data[2]}</p>
+            <p>Team: {((teamData[parseInt(data[2])-1])[1])}</p>
             <p>Birthday: {data[3]}</p>
             <p>Age: {data[4]}</p>
             <p>Height: {data[5]}</p>
